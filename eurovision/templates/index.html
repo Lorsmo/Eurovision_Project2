@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Eurovision</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Leaflet JS & CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+        integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+        crossorigin="" />
+    <!-- New JavaScript library here!! -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <!-- ----  CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <canvas id="canvas-complex" width="1100" height="200"></canvas>
+    <div class="container">
+
+        <div class="col-md-12 jumbotron mb-5 text-center mt-5">
+            <h1>Eurovision</h1>
+            <h2>42 Years of Song Contest</h2>
+            <p>Use the interactive charts below to explore the dataset</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 ml-5">
+            <div class="text-info">
+                <label class="mdb-main-label">Select Edition<br>final/semi-final</label>
+                <select class="custom-select button-primary" id="selEdition" onchange="editionChanged(this.value)">
+                </select>
+                <br>
+                <br>
+                Duration Transition: <br>
+                0 <input type="range" id="duration" min="0" max="5000"> 10
+                <br>
+            </div>
+            <div id="sample-metadata"></div>
+        </div>
+
+        <div class="col-md-9">
+            <div id="pie-chart"></div>
+        </div>
+
+    </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 ml-5 pl-3">
+            <div class="well">
+                <label class="mdb-main-label text-info mt-5">Select Year</label>
+                <select class="custom-select button-primary" id="selYears" onchange="yearchanged(this.value)"></select>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div id="map"></div>
+            <div id="line1"></div>
+            <div id="plot"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 ml-5">
+            <div class="well">
+                <label class="mdb-main-label text-info mt-5">Select Country</label>
+                <select class="custom-select button-primary" id="selcountry"
+                    onchange="countrychanged(this.value)"></select>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <!--<div id="line2"></div>-->
+            <div id="scatter"></div>
+        </div>
+    </div>
+    <div class="row pb-5">
+        <div class="col-md-2 ml-5">
+            <div class="well">
+                <label class="mdb-main-label text-info mt-5">Select From Country:</label>
+                <select class="custom-select button-primary" id="barcountry" onchange="bargraph(this.value)"></select>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <!--<div id="line2"></div>-->
+            <div id="barg"></div>
+        </div>
+    </div>
+    
+
+
+    </div>
+    </div>
+    <!-- Leaflet  -->
+    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+        integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+        crossorigin=""></script>
+    <!-- Granim -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/granim/2.0.0/granim.js"
+        integrity="sha256-3wHhH+xzA0T+1RgmUd8yizA2KVOPWMzs7SYlGz/uhRs=" crossorigin="anonymous"></script>
+    <!-- d3 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.min.js"></script>
+    <!-- New JavaScript library here!! -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <!-- Plotly -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- JS -->
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+
+</body>
+
+</html>
